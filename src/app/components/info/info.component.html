@@ -1,0 +1,6 @@
+<div class="flex column">
+  <div class="mb br">Relayer: <a href="{{utilService.getEtherscan(relayerAddress, chainId)}}">{{relayerAddress}}</a></div>
+  <div class="mb br">Relayer balance: {{balance || '...'}}</div>
+  <div>
+    <a href="{{utilService.getEtherscan(utilService.getContract(chainId), chainId)}}">Contract</a> | <a href="{{utilService.getTenderly(chainId)}}">Tenderly</a></div>
+</div>

@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+.flex {
+  display: flex;
+}
+
+.flex.column {
+  flex-direction: column;
+}
+
+.mr {
+  margin-right: 1rem;
+}
+
+.mb {
+  margin-bottom: 1rem;
+}
