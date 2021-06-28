@@ -54,6 +54,8 @@ export class ExecutedComponent implements OnChanges {
     type: 'bar',
     data: this.chartData,
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         a: {
           type: 'linear',
