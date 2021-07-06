@@ -9,8 +9,19 @@
   <app-info [chainId]="chainId" [relayerAddress]="relayerAddress"></app-info>
   <hr>
   <div *ngIf="loadingData">Loading data...</div>
-  <app-executed [data]="executedOrders"></app-executed>
-  <div style="margin-top: 3rem">
+  <app-executed [orderStatusCount]="executedOrders" [receivedOrdersCount]="receivedOrders"></app-executed>
+
+  <hr>
+
+  <div>
+    <span>Relayer running on: USDC-IRON, WMATIC-TITAN, WETH-USDC, WBTC-WETH, WMATIC-WETH, WETH-USDT, USDC-USDT, WETH-DAI,
+      LINK-WETH, WETH-AAVE, USDC-DAI, WMATIC-USDC, FRAX-USDC, WMATIC-FISH, CRV-WETH, SNX-USDC, FRAX-FXS, WETH-DHT,
+      SUSHI-WETH, GRT-WETH </span>
+  </div>
+
+  <hr>
+  <div>
     <app-logs [logs]="logs"></app-logs>
   </div>
+
 </header>

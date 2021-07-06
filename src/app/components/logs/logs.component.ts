@@ -1,17 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-logs',
   templateUrl: './logs.component.html',
   styleUrls: ['./logs.component.css']
 })
-export class LogsComponent implements OnInit {
+export class LogsComponent {
 
-  @Input() logs: string = "";
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() logs = "";
 
 }

@@ -9,7 +9,7 @@ Chart.register(...registerables);
 })
 export class ExecutedComponent implements OnChanges {
 
-  length = 10;
+  length = 21;
 
   labels = [...Array(this.length)].map((_, i) => {
     const d = new Date();
@@ -44,7 +44,7 @@ export class ExecutedComponent implements OnChanges {
     {
       label: 'Received orders',
       type: 'line' as any,
-      data: [...Array(this.length)].map(() => Math.floor(Math.random() * 100)),
+      data: [...Array(this.length)].map(() => 0),
       yAxisID: 'b'
     }
   ]
@@ -76,7 +76,9 @@ export class ExecutedComponent implements OnChanges {
   constructor() {
   }
 
-  @Input() data: any[] = [];
+  @Input() orderStatusCount: any[] = [];
+
+  @Input() receivedOrdersCount: any[] = [];
 
   chart: Chart | undefined = undefined;
 
@@ -86,10 +88,15 @@ export class ExecutedComponent implements OnChanges {
 
     this.chartData.datasets[0].data = this.labels.map(() => 0);
     this.chartData.datasets[1].data = this.labels.map(() => 0);
+    this.chartData.datasets[2].data = this.labels.map(() => 0);
 
-    const orders = changes.data.currentValue;
+    const orders = changes.orderStatusCount?.currentValue ?? [];
+    const receivedOrders = changes.receivedOrdersCount?.currentValue ?? this.labels.map(() => 0);
 
-    orders.map((o: any) => o.date = new Date(o.createdAt));
+    console.log(receivedOrders);
+
+    orders.forEach((order: any) => order.date = new Date(order.createdAt));
+    receivedOrders.forEach((order: any) => order.date = new Date(order.timestamp));
 
     orders.forEach((order: any) => {
 
@@ -102,17 +109,40 @@ export class ExecutedComponent implements OnChanges {
             this.chartData.datasets[0].data[i]++;
           }
 
+          break;
+
         }
 
       }
 
       if (order.date > this.labels[this.length - 1]) {
 
-        if (order.status === 1) {
+        if (order.status === 1) { // 1 means success
           this.chartData.datasets[1].data[this.length - 1]++;
-        } else if (order.status === 0) {
+        } else if (order.status === 0) { // 0 means failure
           this.chartData.datasets[0].data[this.length - 1]++;
         }
+
+      }
+
+    });
+    console.log(receivedOrders);
+    receivedOrders.forEach((data: any) => {
+
+      console.log(data.date, this.labels[0], this.labels[this.labels.length - 1]);
+
+      for (let i = 0; i < this.labels.length - 1; i++) {
+        if (data.date >= this.labels[i] && data.date <= this.labels[i + 1]) {
+
+          this.chartData.datasets[2].data[i] = data.counter;
+          break;
+
+        }
+      }
+
+      if (data.date > this.labels[this.length - 1]) {
+
+        this.chartData.datasets[2].data[this.length - 1] = data.counter
 
       }
 
