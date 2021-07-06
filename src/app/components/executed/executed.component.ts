@@ -126,7 +126,7 @@ export class ExecutedComponent implements OnChanges {
       }
 
     });
-    console.log(receivedOrders);
+
     receivedOrders.forEach((data: any) => {
 
       console.log(data.date, this.labels[0], this.labels[this.labels.length - 1]);
