@@ -6,7 +6,7 @@ export const environment = {
   production: true,
   relayerAddress: "0x123B749C6aAE8761c4907a784bB8845e67991594",
   polygonScanKey: "G3H3X9ZVE95HBA3FACUBN9UZH5487827MW",
-  apiUrl: "http://34.225.99.120:8080"
+  apiUrl: "http://34.225.99.120"
 };
 
 /*

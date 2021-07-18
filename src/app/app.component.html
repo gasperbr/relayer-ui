@@ -8,15 +8,18 @@
   </div>
   <app-info [chainId]="chainId" [relayerAddress]="relayerAddress"></app-info>
   <hr>
-  <div *ngIf="loadingData">Loading data...</div>
+  <div *ngIf="loadingData == 2">Loading data...</div>
   <app-executed [orderStatusCount]="executedOrders" [receivedOrdersCount]="receivedOrders"></app-executed>
 
   <hr>
 
   <div>
-    <span>Relayer running on: USDC-IRON, WMATIC-TITAN, WETH-USDC, WBTC-WETH, WMATIC-WETH, WETH-USDT, USDC-USDT, WETH-DAI,
-      LINK-WETH, WETH-AAVE, USDC-DAI, WMATIC-USDC, FRAX-USDC, WMATIC-FISH, CRV-WETH, SNX-USDC, FRAX-FXS, WETH-DHT,
-      SUSHI-WETH, GRT-WETH </span>
+    <!-- <span>Relayer running on: USDC-IRON, WMATIC-TITAN, WETH-USDC, WBTC-WETH, WMATIC-WETH, WETH-USDT, USDC-USDT, WETH-DAI, LINK-WETH, WETH-AAVE, USDC-DAI, WMATIC-USDC, FRAX-USDC, WMATIC-FISH, CRV-WETH, SNX-USDC, FRAX-FXS, WETH-DHT, SUSHI-WETH, GRT-WETH </span> -->
+    <span>Relayer running on: WETH-WMATIC, WETH-USDC, WMATIC-USDC, WETH-DAI, WBTC-WETH, USDC-USDT, USDC-IRON, WETH-USDT,
+      WMATIC-WETH, USDC-DAI, WETH-AAVE, LINK-WETH, FRAX-USDC, WMATIC-USDC, WMATIC-FISH, WMATIC-TITAN, CRV-WETH, SNX-USDC,
+      FRAX-FXS, SUSHI-WETH, GRT-WETH, WBTC-ibBTC, USDC-PUSD, dTOP-WETH, SNX-WETH, DHT-WETH, USDC-PYQ, WETH-SX, OMEN-WETH,
+      OMEN-WMATIC, WETH-wFIL, USDC-BIFI, WMATIC-WOOFY, SUSHI-WMATIC, WMATIC-PGOV, renDOGE-WETH, WMATIC-BONE, USDC-BONE,
+      USDC-SUSHI </span>
   </div>
 
   <hr>

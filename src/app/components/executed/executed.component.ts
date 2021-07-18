@@ -86,67 +86,71 @@ export class ExecutedComponent implements OnChanges {
 
     if (this.chart) this.chart.destroy();
 
-    this.chartData.datasets[0].data = this.labels.map(() => 0);
-    this.chartData.datasets[1].data = this.labels.map(() => 0);
-    this.chartData.datasets[2].data = this.labels.map(() => 0);
+    // this.chartData.datasets[0].data = this.labels.map(() => 0);
+    // this.chartData.datasets[1].data = this.labels.map(() => 0);
+    // this.chartData.datasets[2].data = this.labels.map(() => 0);
 
-    const orders = changes.orderStatusCount?.currentValue ?? [];
-    const receivedOrders = changes.receivedOrdersCount?.currentValue ?? this.labels.map(() => 0);
+    const orders = changes.orderStatusCount?.currentValue;
+    const receivedOrders = changes.receivedOrdersCount?.currentValue;
 
-    console.log(receivedOrders);
+    if (orders) {
 
-    orders.forEach((order: any) => order.date = new Date(order.createdAt));
-    receivedOrders.forEach((order: any) => order.date = new Date(order.timestamp));
+      orders.forEach((order: any) => order.date = new Date(order.createdAt));
 
-    orders.forEach((order: any) => {
+      orders.forEach((order: any) => {
 
-      for(let i = 0; i < this.labels.length - 1; i++) {
+        for (let i = 0; i < this.labels.length - 1; i++) {
 
-        if (order.date > this.labels[i] && order.date < this.labels[i+1]) {
-          if (order.status === 1) {
-            this.chartData.datasets[1].data[i]++;
-          } else if (order.status === 0) {
-            this.chartData.datasets[0].data[i]++;
+          if (order.date >= this.labels[i] && order.date < this.labels[i + 1]) {
+            if (order.status === 1) {
+              this.chartData.datasets[1].data[i]++;
+            } else if (order.status === 0) {
+              this.chartData.datasets[0].data[i]++;
+            }
+
+            break;
+
           }
 
-          break;
+        }
+
+        if (order.date >= this.labels[this.length - 1]) {
+
+          if (order.status === 1) { // 1 means success
+            this.chartData.datasets[1].data[this.length - 1]++;
+          } else if (order.status === 0) { // 0 means failure
+            this.chartData.datasets[0].data[this.length - 1]++;
+          }
 
         }
 
-      }
+      });
+    }
 
-      if (order.date > this.labels[this.length - 1]) {
+    if (receivedOrders) {
 
-        if (order.status === 1) { // 1 means success
-          this.chartData.datasets[1].data[this.length - 1]++;
-        } else if (order.status === 0) { // 0 means failure
-          this.chartData.datasets[0].data[this.length - 1]++;
+
+      receivedOrders.forEach((order: any) => order.date = new Date(order.timestamp));
+
+      receivedOrders.forEach((data: any) => {
+
+        for (let i = 0; i < this.labels.length - 1; i++) {
+          if (data.date >= this.labels[i] && data.date < this.labels[i + 1]) {
+
+            this.chartData.datasets[2].data[i] = data.counter;
+            break;
+
+          }
         }
 
-      }
+        if (data.date >= this.labels[this.length - 1]) {
 
-    });
-
-    receivedOrders.forEach((data: any) => {
-
-      console.log(data.date, this.labels[0], this.labels[this.labels.length - 1]);
-
-      for (let i = 0; i < this.labels.length - 1; i++) {
-        if (data.date >= this.labels[i] && data.date <= this.labels[i + 1]) {
-
-          this.chartData.datasets[2].data[i] = data.counter;
-          break;
+          this.chartData.datasets[2].data[this.length - 1] = data.counter
 
         }
-      }
 
-      if (data.date > this.labels[this.length - 1]) {
-
-        this.chartData.datasets[2].data[this.length - 1] = data.counter
-
-      }
-
-    });
+      });
+    }
 
     this.config.data = this.chartData;
 
