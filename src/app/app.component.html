@@ -8,7 +8,7 @@
   </div>
   <app-info [chainId]="chainId" [relayerAddress]="relayerAddress"></app-info>
   <hr>
-  <div *ngIf="loadingData == 2">Loading data...</div>
+  <div *ngIf="loadingData != 2">Loading data...</div>
   <app-executed [orderStatusCount]="executedOrders" [receivedOrdersCount]="receivedOrders"></app-executed>
 
   <hr>
