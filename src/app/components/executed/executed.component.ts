@@ -20,7 +20,7 @@ export class ExecutedComponent implements OnChanges {
   chartData = {
     labels: this.labels.map(d => `${d.getDate()}. ${1 + d.getMonth()}`),
     datasets: [{
-      label: 'Failed',
+      label: 'Failed fills',
       data: [...Array(this.length)].map(() => 0),
       backgroundColor: [
         'rgba(255, 159, 64, 0.2)',
@@ -31,7 +31,7 @@ export class ExecutedComponent implements OnChanges {
       borderWidth: 1
     },
     {
-      label: 'Successful',
+      label: 'Successful fills',
       data: [...Array(this.length)].map(() => 0),
       backgroundColor: [
         'rgba(75, 192, 192, 0.2)',
